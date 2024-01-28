@@ -1,6 +1,6 @@
 package cn.iamdt.test;
 
-public class Employee {
+public abstract class Employee {
     private String name;
     private int age;
     private int salary;
@@ -69,7 +69,5 @@ public class Employee {
         this.salary = salary;
     }
 
-    public void work() {
-        System.out.println("员工工作");
-    }
+    public abstract void work();        // 员工工作方法定义为抽象方法
 }
