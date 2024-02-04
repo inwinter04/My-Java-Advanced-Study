@@ -115,7 +115,7 @@ public class MainFrame extends JFrame implements KeyListener {
             getContentPane().add(winLabel);
         }
 
-        JButton btn = new JButton();
+        JButton btn = new JButton("重新开始");
         btn.setBounds(350, 20, 100, 20);
         getContentPane().add(btn);
         btn.setFocusable(false);
