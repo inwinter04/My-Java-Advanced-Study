@@ -1,7 +1,6 @@
 package cn.iamdt.stonepuzzle;
 
 import javax.swing.*;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Random;
@@ -14,8 +13,11 @@ public class MainFrame extends JFrame implements KeyListener {
             {13, 14, 15, 0}
     };
 
+    int row;            // 0号元素行坐标
+    int column;         // 0号元素列坐标
+
     public MainFrame() {
-        // 注册键盘监听器
+        // 注册键盘监听器。  窗体对象.addKeyListener(KeyListener实现类对象)
         this.addKeyListener(this);
         // 初始化窗体
         initFrame();
@@ -45,8 +47,17 @@ public class MainFrame extends JFrame implements KeyListener {
                 data[randomX][randomY] = temp;
             }
         }
-    }
 
+        for (int i = 0; i < data.length; i++) {
+            for (int j = 0; j < data[i].length; j++) {
+                if (data[i][j] == 0) {
+                    row = i;
+                    column = j;
+                }
+            }
+        }
+        System.out.println(row + "," + column);
+    }
 
     /**
      * 初始化窗体
@@ -70,6 +81,9 @@ public class MainFrame extends JFrame implements KeyListener {
      * 绘制界面
      */
     public void paintView() {
+        // 清空原有控件
+        getContentPane().removeAll();
+
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 JLabel imageLabel = new JLabel(new ImageIcon("E:\\Codes\\Java\\Advanced-Codes\\day04-code\\src\\cn\\iamdt\\stonepuzzle\\image\\" + data[i][j] + ".png"));
@@ -81,20 +95,72 @@ public class MainFrame extends JFrame implements KeyListener {
         JLabel background = new JLabel(new ImageIcon("E:\\Codes\\Java\\Advanced-Codes\\day04-code\\src\\cn\\iamdt\\stonepuzzle\\image\\background.png"));
         background.setBounds(26, 30, 450, 484);
         getContentPane().add(background);
+
+        // 重新绘制新界面
+        getContentPane().repaint();
     }
-    
+
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
+        move(keyCode);
+        paintView();
+    }
+
+    /**
+     * 此方法用于处理移动业务
+     */
+    public void move(int keyCode) {
         if (keyCode == 37) {
-            System.out.println("左移动业务代码");
+            // 左移动业务代码
+            // 移动前：data[row][column]
+            // 移动后：data[row][column+1]
+            if (column != 3) {
+                int temp = data[row][column];
+                data[row][column] = data[row][column + 1];
+                data[row][column + 1] = temp;
+                column++;
+            }
         } else if (keyCode == 38) {
-            System.out.println("上移动业务代码");
+            // 上移动业务代码
+            // 移动前：data[row][column]
+            // 移动后：data[row+1][column]
+            if (row != 3) {
+                int temp = data[row][column];
+                data[row][column] = data[row + 1][column];
+                data[row + 1][column] = temp;
+                row++;
+            }
         } else if (keyCode == 39) {
-            System.out.println("右移动业务代码");
+            // 右移动业务代码
+            // 移动前：data[row][column]
+            // 移动后：data[row][column-1]
+            if (column != 0) {
+                int temp = data[row][column];
+                data[row][column] = data[row][column - 1];
+                data[row][column - 1] = temp;
+                column--;
+            }
         } else if (keyCode == 40) {
-            System.out.println("下移动业务代码");
+            // 下移动业务代码
+            // 移动前：data[row][column]
+            // 移动后：data[row-1][column]
+            if (row != 0) {
+                int temp = data[row][column];
+                data[row][column] = data[row - 1][column];
+                data[row - 1][column] = temp;
+                row--;
+            }
         }
+//        else if (keyCode == 90) {
+//            // 作弊器代码：z
+//            data = new int[][]{
+//                    {1, 2, 3, 4},
+//                    {5, 6, 7, 8},
+//                    {9, 10, 11, 12},
+//                    {13, 14, 15, 0}
+//            };
+//        }
     }
 
     // ---------------------------------------------------------
@@ -107,5 +173,5 @@ public class MainFrame extends JFrame implements KeyListener {
     public void keyReleased(KeyEvent e) {
 
     }
-// ----------------------------------------------------------
+    // ----------------------------------------------------------
 }
