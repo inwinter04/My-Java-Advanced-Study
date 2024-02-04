@@ -1,6 +1,8 @@
 package cn.iamdt.stonepuzzle;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Random;
@@ -13,8 +15,16 @@ public class MainFrame extends JFrame implements KeyListener {
             {13, 14, 15, 0}
     };
 
+    int[][] win = {
+            {1, 2, 3, 4},
+            {5, 6, 7, 8},
+            {9, 10, 11, 12},
+            {13, 14, 15, 0}
+    };
+
     int row;            // 0号元素行坐标
     int column;         // 0号元素列坐标
+    int count;          // 计数器变量
 
     public MainFrame() {
         // 注册键盘监听器。  窗体对象.addKeyListener(KeyListener实现类对象)
@@ -78,11 +88,46 @@ public class MainFrame extends JFrame implements KeyListener {
     }
 
     /**
+     * 判断游戏是否胜利
+     */
+    public boolean victory() {
+        for (int i = 0; i < win.length; i++) {
+            for (int j = 0; j < win[i].length; j++) {
+                if (win[i][j] != data[i][j]) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * 绘制界面
      */
     public void paintView() {
         // 清空原有控件
         getContentPane().removeAll();
+
+        if (victory()) {
+            JLabel winLabel = new JLabel(new ImageIcon("E:\\Codes\\Java\\Advanced-Codes\\day04-code\\src\\cn\\iamdt\\stonepuzzle\\image\\win.png"));
+            winLabel.setBounds(124, 230, 266, 88);
+            getContentPane().add(winLabel);
+        }
+
+        JButton btn = new JButton();
+        btn.setBounds(350, 20, 100, 20);
+        getContentPane().add(btn);
+        btn.setFocusable(false);
+        btn.addActionListener(e -> {
+            count = 0;
+            initData();
+            paintView();
+        });
+
+        JLabel scoreLabel = new JLabel("步数为：" + count);
+        scoreLabel.setBounds(50, 20, 100, 20);
+        getContentPane().add(scoreLabel);
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
@@ -100,6 +145,9 @@ public class MainFrame extends JFrame implements KeyListener {
         getContentPane().repaint();
     }
 
+    /**
+     * 此方法用于监听键盘操作
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
@@ -111,6 +159,10 @@ public class MainFrame extends JFrame implements KeyListener {
      * 此方法用于处理移动业务
      */
     public void move(int keyCode) {
+        if (victory()) {
+            return;
+        }
+
         if (keyCode == 37) {
             // 左移动业务代码
             // 移动前：data[row][column]
@@ -120,6 +172,7 @@ public class MainFrame extends JFrame implements KeyListener {
                 data[row][column] = data[row][column + 1];
                 data[row][column + 1] = temp;
                 column++;
+                count++;
             }
         } else if (keyCode == 38) {
             // 上移动业务代码
@@ -130,6 +183,7 @@ public class MainFrame extends JFrame implements KeyListener {
                 data[row][column] = data[row + 1][column];
                 data[row + 1][column] = temp;
                 row++;
+                count++;
             }
         } else if (keyCode == 39) {
             // 右移动业务代码
@@ -140,6 +194,7 @@ public class MainFrame extends JFrame implements KeyListener {
                 data[row][column] = data[row][column - 1];
                 data[row][column - 1] = temp;
                 column--;
+                count++;
             }
         } else if (keyCode == 40) {
             // 下移动业务代码
@@ -150,17 +205,17 @@ public class MainFrame extends JFrame implements KeyListener {
                 data[row][column] = data[row - 1][column];
                 data[row - 1][column] = temp;
                 row--;
+                count++;
             }
+        } else if (keyCode == 90) {
+            // 作弊器代码：z
+            data = new int[][]{
+                    {1, 2, 3, 4},
+                    {5, 6, 7, 8},
+                    {9, 10, 11, 12},
+                    {13, 14, 15, 0}
+            };
         }
-//        else if (keyCode == 90) {
-//            // 作弊器代码：z
-//            data = new int[][]{
-//                    {1, 2, 3, 4},
-//                    {5, 6, 7, 8},
-//                    {9, 10, 11, 12},
-//                    {13, 14, 15, 0}
-//            };
-//        }
     }
 
     // ---------------------------------------------------------
