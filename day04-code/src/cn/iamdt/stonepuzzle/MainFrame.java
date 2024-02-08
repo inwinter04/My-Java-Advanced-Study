@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Objects;
 import java.util.Random;
 
 public class MainFrame extends JFrame implements KeyListener {
@@ -66,7 +67,6 @@ public class MainFrame extends JFrame implements KeyListener {
                 }
             }
         }
-        System.out.println(row + "," + column);
     }
 
     /**
@@ -110,7 +110,8 @@ public class MainFrame extends JFrame implements KeyListener {
         getContentPane().removeAll();
 
         if (victory()) {
-            JLabel winLabel = new JLabel(new ImageIcon("E:\\Codes\\Java\\Advanced-Codes\\day04-code\\src\\cn\\iamdt\\stonepuzzle\\image\\win.png"));
+            ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/cn/iamdt/stonepuzzle/image/win.png")));
+            JLabel winLabel = new JLabel(icon);
             winLabel.setBounds(124, 230, 266, 88);
             getContentPane().add(winLabel);
         }
@@ -131,13 +132,15 @@ public class MainFrame extends JFrame implements KeyListener {
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                JLabel imageLabel = new JLabel(new ImageIcon("E:\\Codes\\Java\\Advanced-Codes\\day04-code\\src\\cn\\iamdt\\stonepuzzle\\image\\" + data[i][j] + ".png"));
+                ImageIcon image = new ImageIcon(Objects.requireNonNull(getClass().getResource("/cn/iamdt/stonepuzzle/image/" + data[i][j] + ".png")));
+                JLabel imageLabel = new JLabel(image);
                 imageLabel.setBounds(50 + 100 * j, 90 + 100 * i, 100, 100);
                 getContentPane().add(imageLabel);
             }
         }
 
-        JLabel background = new JLabel(new ImageIcon("E:\\Codes\\Java\\Advanced-Codes\\day04-code\\src\\cn\\iamdt\\stonepuzzle\\image\\background.png"));
+        ImageIcon image = new ImageIcon(Objects.requireNonNull(getClass().getResource("/cn/iamdt/stonepuzzle/image/background.png")));
+        JLabel background = new JLabel(image);
         background.setBounds(26, 30, 450, 484);
         getContentPane().add(background);
 
