@@ -1,7 +1,5 @@
 package cn.iamdt.integer;
 
-import java.util.ArrayList;
-
 public class IntegerTest {
     /*
         已知字符串 String s = "10,50,30,20,40";

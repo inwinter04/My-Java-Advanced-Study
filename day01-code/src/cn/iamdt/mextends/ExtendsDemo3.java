@@ -1,7 +1,5 @@
 package cn.iamdt.mextends;
 
-import java.sql.SQLOutput;
-
 public class ExtendsDemo3 {
     /*
         方法重载(Overload) : 在同一个类中，方法名相同，参数不同，与返回值无关

@@ -1,7 +1,5 @@
 package cn.iamdt.test;
 
-import cn.iamdt.jdk8.p8_interval.ChronoUnitDemo;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
