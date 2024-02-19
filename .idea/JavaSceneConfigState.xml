@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SmartInputSourceJavaSceneConfigState">
-    <option name="customChineseScenes" value="{&quot;capsLockState&quot;:false,&quot;code&quot;:&quot;s3;s4;contains(o);add(element);set(element);addFirst(e);addLast(e);setE(e);println(x);put(key,value);remove(key);containsKey(key);containsValue(value)&quot;,&quot;enable&quot;:true,&quot;languageType&quot;:&quot;CHINESE&quot;,&quot;name&quot;:&quot;自定义中文切换&quot;,&quot;tip&quot;:&quot;&quot;}" />
+    <option name="customChineseScenes" value="{&quot;capsLockState&quot;:false,&quot;code&quot;:&quot;s3;s4;contains(o);add(element);set(element);addFirst(e);addLast(e);setE(e);println(x);put(value,key);remove(key);containsKey(key);containsValue(value);addAll(elements);append(str)&quot;,&quot;enable&quot;:true,&quot;languageType&quot;:&quot;CHINESE&quot;,&quot;name&quot;:&quot;自定义中文切换&quot;,&quot;tip&quot;:&quot;&quot;}" />
   </component>
 </project>

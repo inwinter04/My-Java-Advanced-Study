@@ -3,6 +3,7 @@ package cn.iamdt.map;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.BiConsumer;
 
 public class MapDemo3 {
     public static void main(String[] args) {
@@ -12,6 +13,12 @@ public class MapDemo3 {
         hm.put("李四", "上海");
         hm.put("王五", "成都");
 
+        hm.forEach(new BiConsumer<String, String>() {
+            @Override
+            public void accept(String key, String value) {
+                System.out.println(key + "---" + value);
+            }
+        });
 
     }
 
